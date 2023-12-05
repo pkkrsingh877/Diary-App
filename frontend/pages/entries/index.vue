@@ -14,8 +14,8 @@
                             <div class="content">{{ entry.description }}</div>
                         </div>
                         <footer class="card-footer">
-                            <a :href="`/todos/${entry._id}`" class="card-footer-item">View</a>
-                            <a :href="`/todos/edit/${entry._id}`" class="card-footer-item">Edit</a>
+                            <a :href="`/entries/${entry._id}`" class="card-footer-item">View</a>
+                            <a :href="`/entries/edit/${entry._id}`" class="card-footer-item">Edit</a>
                             <a @click="deleteEntry(entry._id)" class="card-footer-item">Delete</a>
                         </footer>
                     </div>

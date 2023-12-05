@@ -11,9 +11,9 @@
                 </div>
 
                 <div class="field">
-                    <label class="label">Todo</label>
+                    <label class="label">Entry</label>
                     <div class="control">
-                        <textarea class="textarea" placeholder="note" id="description" v-model="description"></textarea>
+                        <textarea class="textarea" placeholder="Entry" id="description" v-model="description"></textarea>
                     </div>
                 </div>
 

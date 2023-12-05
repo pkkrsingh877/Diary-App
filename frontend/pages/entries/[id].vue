@@ -29,12 +29,11 @@
 import { ref, onMounted } from 'vue';
 
 const entry = ref('');
-const router = useRouter();
 
 const fetchEntry = async () => {
     try {
-        const { id } = router.params;
-        const response = await fetch(`http://localhost:8000/todos/${id}`, {
+        const { id } = useRoute().params;
+        const response = await fetch(`http://localhost:8000/entries/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

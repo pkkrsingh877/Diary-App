@@ -15,7 +15,7 @@
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
                 <NuxtLink class="navbar-item" to="/entries">
-                    Todos
+                    Entries
                 </NuxtLink>
                 <NuxtLink class="navbar-item" to="/entries/create">
                     Create

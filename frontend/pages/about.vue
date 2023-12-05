@@ -2,28 +2,26 @@
     <div class="container">
         <section class="section">
             <div class="content">
-                <h1 class="title">About Our Todos App</h1>
+                <h1 class="title">About Our Diary App</h1>
                 <p>
-                    Welcome to our Todos App 🚀, a powerful tool designed to help you manage your tasks and stay organized
-                    in your day-to-day activities. Whether you're a busy professional, a student with assignments 📚, or
-                    someone striving for better time management, our app is here to simplify your task management process.
+                    Welcome to our Diary App 📔✨, a secure and personal space crafted to capture your thoughts and moments.
+                    Whether you're an avid journaler, a creative writer 🖋️, or someone who wants to preserve memories,
+                    our app is here to make your diary-keeping experience delightful and private.
                 </p>
                 <p>
-                    With an intuitive and clean interface, you can easily add, edit, and mark tasks as complete ✅. Our app
-                    offers a customizable priority system ⭐, allowing you to prioritize tasks based on their importance.
-                    Stay
-                    on top of your deadlines and commitments with our Todos App.
+                    With a focus on security 🔐, each entry is encrypted and stored with care to ensure the confidentiality
+                    of your reflections. Express yourself freely, knowing that your secrets are safe within the pages of
+                    our Diary App.
                 </p>
                 <p>
-                    Organize your tasks into categories 🗂️, set due dates ⏰, and never miss an important deadline again.
-                    Whether
-                    you're tackling work projects, academic assignments, or personal goals 🎯, our Todos App is your go-to
-                    companion for efficient task management.
+                    Organize your entries by date 🗓️, add multimedia attachments 📷, and customize your writing
+                    with rich text formatting options. Our Diary App is not just a diary; it's your canvas for
+                    self-expression and reflection.
                 </p>
                 <p>
-                    Boost your productivity, manage your time effectively, and achieve your goals with our Todos App 🎉.
-                    Thank
-                    you for choosing us to be a part of your journey towards enhanced task management and productivity.
+                    Embrace the journey of self-discovery, celebrate achievements 🎉, and navigate challenges through
+                    the pages of our Diary App. Thank you for choosing us to be a part of your daily reflections and
+                    personal growth 🌱.
                 </p>
             </div>
         </section>

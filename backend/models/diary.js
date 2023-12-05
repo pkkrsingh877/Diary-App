@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
-const User = require('../models/user');
+const User = require('./user');
 
-const noteSchema = mongoose.Schema({
+// Later i will add more features like starring entries, adding tags, and others
+const diarySchema = mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Title is required!']
@@ -16,6 +17,6 @@ const noteSchema = mongoose.Schema({
     }
 }, { timestamps: true });
 
-const Note = mongoose.model('Note', noteSchema);
+const Diary = mongoose.model('Diary', diarySchema);
 
-module.exports = Note;
+module.exports = Diary;

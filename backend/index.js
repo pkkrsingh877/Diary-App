@@ -29,18 +29,16 @@ const verifyUser = require('./middlewares/verifyUser');
 // Files for Route Handlers
 const notesRoutes = require('./routes/notes');
 const authRoutes = require('./routes/auth');
-// const userRoutes = require('./routes/users');
 
 // Middleware for Routes
 app.use('/notes', verifyUser, notesRoutes);
 app.use('/auth', authRoutes);
-// app.use('/user', userRoutes);
 
 // Database setup
 
 const databaseSetup = async () => {
     try {
-        await mongoose.connect('mongodb://127.0.0.1:27017/notesapp');
+        await mongoose.connect('mongodb://127.0.0.1:27017/diaryapp');
         console.log('DB Connection Successful');
     } catch (error) {
         console.log(error);

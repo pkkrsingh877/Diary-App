@@ -58,7 +58,7 @@ const handleLogin = async (e) => {
         }),
         credentials: 'include'
     });
-    router.push('/todos');
+    router.push('/entries');
 }
 </script>
 

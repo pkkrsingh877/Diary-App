@@ -82,7 +82,7 @@ const handleSignup = async (e) => {
         }),
         credentials: 'include'
     });
-    router.push('/todos');
+    router.push('/entries');
 }
 </script>
 

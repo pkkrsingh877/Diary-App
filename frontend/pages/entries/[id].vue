@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="section">
-            <div v-if="entry.length === 0">No todos available.</div>
+            <div v-if="entry.length === 0">No entries available.</div>
             <div v-else>
                 <div class="card">
                     <header class="card-header">
@@ -17,7 +17,7 @@
                     <footer class="card-footer">
                         <a :href="`/entries/${entry._id}`" class="card-footer-item">View</a>
                         <a :href="`/entries/edit/${entry._id}`" class="card-footer-item">Edit</a>
-                        <a @click="deleteTodo(entry._id)" class="card-footer-item">Delete</a>
+                        <a @click="deleteEntry(entry._id)" class="card-footer-item">Delete</a>
                     </footer>
                 </div>
             </div>
@@ -31,9 +31,9 @@ import { ref, onMounted } from 'vue';
 const entry = ref('');
 const router = useRouter();
 
-const fetchTodo = async () => {
+const fetchEntry = async () => {
     try {
-        const { id } = useRoute().params;
+        const { id } = router.params;
         const response = await fetch(`http://localhost:8000/todos/${id}`, {
             method: 'GET',
             headers: {
@@ -47,13 +47,13 @@ const fetchTodo = async () => {
             entry.value = data;
         }
     } catch (error) {
-        console.error('Error fetching todos:', error);
+        console.error('Error fetching entry:', error);
     }
 };
 
-onMounted(fetchTodo);
+onMounted(fetchEntry);
 
-const deleteTodo = async (id) => {
+const deleteEntry = async (id) => {
     try {
         const response = await fetch(`http://localhost:8000/entries/${id}`, {
             method: 'DELETE',
@@ -66,7 +66,7 @@ const deleteTodo = async (id) => {
         const data = await response.json();
         router.push('/');
     } catch (error) {
-        console.error('Error deleting todos:', error);
+        console.error('Error deleting entry:', error);
     }
 };
 </script>

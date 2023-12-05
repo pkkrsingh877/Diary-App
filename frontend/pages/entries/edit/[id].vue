@@ -1,8 +1,8 @@
 <template>
     <div class="columns is-centered">
         <div class="column is-half">
-            <h1 class="title">Update Todo</h1>
-            <form action="" @submit="handleUpdateTodo">
+            <h1 class="title">Update Entry</h1>
+            <form action="" @submit="handleUpdateEntry">
                 <div class="field">
                     <label class="label">Title</label>
                     <div class="control">
@@ -11,9 +11,9 @@
                 </div>
 
                 <div class="field">
-                    <label class="label">Todo</label>
+                    <label class="label">Entry</label>
                     <div class="control">
-                        <textarea class="textarea" placeholder="todo" id="description" v-model="description"></textarea>
+                        <textarea class="textarea" placeholder="entry" id="description" v-model="description"></textarea>
                     </div>
                 </div>
 
@@ -32,10 +32,10 @@ const title = ref('');
 const description = ref('');
 
 // Fetch notes from the server
-const fetchTodo = async () => {
+const fetchEntry = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await fetch(`http://localhost:8000/todos/${id}`, {
+        const response = await fetch(`http://localhost:8000/entries/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,17 +47,17 @@ const fetchTodo = async () => {
         title.value = data.title;
         description.value = data.description;
     } catch (error) {
-        console.error('Error fetching todos:', error);
+        console.error('Error fetching entries:', error);
     }
 };
 
 // Call fetchNotes when the component is mounted
-onMounted(fetchTodo);
+onMounted(fetchEntry);
 
-const handleUpdateTodo = async (e) => {
+const handleUpdateEntry = async (e) => {
     e.preventDefault();
     const { id } = useRoute().params;
-    const { message } = await useFetch(`http://localhost:8000/todos/${id}`, {
+    const { message } = await useFetch(`http://localhost:8000/entries/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const handleUpdateTodo = async (e) => {
         }),
         credentials: 'include'
     });
-    router.push('/todos');
+    router.push('/entries');
 }
 </script>
 

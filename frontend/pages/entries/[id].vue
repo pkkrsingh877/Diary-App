@@ -1,23 +1,23 @@
 <template>
     <div class="container">
         <div class="section">
-            <div v-if="todo.length === 0">No todos available.</div>
+            <div v-if="entry.length === 0">No todos available.</div>
             <div v-else>
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">
-                            {{ todo.title }}
+                            {{ entry.title }}
                         </p>
                     </header>
                     <div class="card-content">
                         <div class="content">
-                            {{ todo.description }}
+                            {{ entry.description }}
                         </div>
                     </div>
                     <footer class="card-footer">
-                        <a :href="`/todos/${todo._id}`" class="card-footer-item">View</a>
-                        <a :href="`/todos/edit/${todo._id}`" class="card-footer-item">Edit</a>
-                        <a @click="deleteTodo(todo._id)" class="card-footer-item">Delete</a>
+                        <a :href="`/entries/${entry._id}`" class="card-footer-item">View</a>
+                        <a :href="`/entries/edit/${entry._id}`" class="card-footer-item">Edit</a>
+                        <a @click="deleteTodo(entry._id)" class="card-footer-item">Delete</a>
                     </footer>
                 </div>
             </div>
@@ -28,7 +28,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const todo = ref('');
+const entry = ref('');
 const router = useRouter();
 
 const fetchTodo = async () => {
@@ -44,7 +44,7 @@ const fetchTodo = async () => {
         });
         const data = await response.json();
         if (data.message !== 'Unauthorized: No token provided') {
-            todo.value = data;
+            entry.value = data;
         }
     } catch (error) {
         console.error('Error fetching todos:', error);
@@ -55,7 +55,7 @@ onMounted(fetchTodo);
 
 const deleteTodo = async (id) => {
     try {
-        const response = await fetch(`http://localhost:8000/todos/${id}`, {
+        const response = await fetch(`http://localhost:8000/entries/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

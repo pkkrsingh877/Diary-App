@@ -1,22 +1,22 @@
 <template>
     <div class="container">
         <div class="section">
-            <div v-if="todos.length === 0">
-                No todos available.
+            <div v-if="entries.length === 0">
+                No entries available.
             </div>
             <div v-else>
-                <div v-for="todo in todos" :key="todo._id">
+                <div v-for="entry in entries" :key="entry._id">
                     <div class="card  mb-4">
                         <header class="card-header">
-                            <p class="card-header-title">{{ todo.title }}</p>
+                            <p class="card-header-title">{{ entry.title }}</p>
                         </header>
                         <div class="card-content">
-                            <div class="content">{{ todo.description }}</div>
+                            <div class="content">{{ entry.description }}</div>
                         </div>
                         <footer class="card-footer">
-                            <a :href="`/todos/${todo._id}`" class="card-footer-item">View</a>
-                            <a :href="`/todos/edit/${todo._id}`" class="card-footer-item">Edit</a>
-                            <a @click="deleteNote(todo._id)" class="card-footer-item">Delete</a>
+                            <a :href="`/todos/${entry._id}`" class="card-footer-item">View</a>
+                            <a :href="`/todos/edit/${entry._id}`" class="card-footer-item">Edit</a>
+                            <a @click="deleteEntry(entry._id)" class="card-footer-item">Delete</a>
                         </footer>
                     </div>
                 </div>
@@ -27,11 +27,11 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-const todos = ref([]);
+const entries = ref([]);
 
-const fetchNotes = async () => {
+const fetchEntries = async () => {
     try {
-        const response = await fetch('http://localhost:8000/todos/', {
+        const response = await fetch('http://localhost:8000/entries/', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,20 +41,18 @@ const fetchNotes = async () => {
         });
         const data = await response.json();
         if (data.message !== 'Unauthorized: No token provided') {
-            todos.value = data;
+            entries.value = data;
         }
     } catch (error) {
-        console.error('Error fetching todos:', error);
+        console.error('Error fetching entries:', error);
     }
 };
 
-onMounted(fetchNotes);
+onMounted(fetchEntries);
 
-const status = ref('');
-
-const deleteNote = async (id) => {
+const deleteEntry = async (id) => {
     try {
-        const response = await fetch(`http://localhost:8000/todos/${id}`, {
+        const response = await fetch(`http://localhost:8000/entries/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,12 +61,12 @@ const deleteNote = async (id) => {
             credentials: 'include'
         });
         if (response.ok) {
-            todos.value = todos.value.filter(todo => todo._id !== id);
+            entries.value = entries.value.filter(entry => entry._id !== id);
         } else {
             console.error('Failed to delete todo. Server response:', response);
         }
     } catch (error) {
-        console.error('Error deleting todos:', error);
+        console.error('Error deleting entries:', error);
     }
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
     <div class="columns is-centered">
         <div class="column is-half">
-            <h1 class="title">Create New Todo</h1>
-            <form action="" @submit="handleCreateTodo">
+            <h1 class="title">Create New Entry</h1>
+            <form action="" @submit="handleCreateEntry">
                 <div class="field">
                     <label class="label">Title</label>
                     <div class="control">
@@ -31,9 +31,9 @@ const router = useRouter();
 const title = ref('');
 const description = ref('');
 
-const handleCreateTodo = async (e) => {
+const handleCreateEntry = async (e) => {
     e.preventDefault();
-    const { data, error, pending } = await useFetch('http://localhost:8000/todos/', {
+    const { data, error, pending } = await useFetch('http://localhost:8000/entries/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const handleCreateTodo = async (e) => {
         }),
         credentials: 'include'
     });
-    router.push('/todos');
+    router.push('/entries');
 }
 </script>
 

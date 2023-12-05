@@ -1,30 +1,30 @@
-const Note = require("../models/diary");
+const Diary = require("../models/diary");
 
-const getNotes = async (req, res) => {
+const getEntries = async (req, res) => {
     try {
-        let notes = await Note.find({ userId: req.user });
-        res.status(200).json(notes);
+        let entries = await Diary.find({ userId: req.user });
+        res.status(200).json(entries);
     } catch (error) {
         console.log(error);
         res.status(400).json({ "error": "Couldn't Get The Data" });
     }
 }
 
-const getNote = async (req, res) => {
+const getEntry = async (req, res) => {
     try {
         const { id } = req.params;
-        const note = await Note.findOne({ _id: id, userId: req.user });
-        res.status(200).json(note);
+        const entry = await Diary.findOne({ _id: id, userId: req.user });
+        res.status(200).json(entry);
     } catch (error) {
         console.log(error);
         res.status(500).json(error);
     }
 }
 
-const createNote = async (req, res) => {
+const createEntry = async (req, res) => {
     try {
         const { title, description } = req.body;
-        await Note.create({ title, description, userId: req.user });
+        await Diary.create({ title, description, userId: req.user });
         res.status(200).json({ status: "success" });
     } catch (error) {
         console.log(error);
@@ -32,11 +32,11 @@ const createNote = async (req, res) => {
     }
 }
 
-const updateNote = async (req, res) => {
+const updateEntry = async (req, res) => {
     try {
         const { id } = req.params;
         const { title, description } = req.body;
-        await Note.findOneAndUpdate({ _id: id, userId: req.user }, {
+        await Diary.findOneAndUpdate({ _id: id, userId: req.user }, {
             title, description, updatedAt: Date.now()
         });
         res.status(200).json({ status: "success" });
@@ -46,10 +46,10 @@ const updateNote = async (req, res) => {
     }
 }
 
-const deleteNote = async (req, res) => {
+const deleteEntry = async (req, res) => {
     try {
         const { id } = req.params;
-        const note = await Note.findOneAndDelete({ _id: id, userId: req.user });
+        const entry = await Diary.findOneAndDelete({ _id: id, userId: req.user });
         res.status(200).json({ status: 'success' });
     } catch (error) {
         console.log(error);
@@ -57,4 +57,4 @@ const deleteNote = async (req, res) => {
     }
 }
 
-module.exports = { getNotes, getNote, createNote, updateNote, deleteNote };
+module.exports = { getEntries, getEntry, createEntry, updateEntry, deleteEntry };

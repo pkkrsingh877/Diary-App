@@ -44,6 +44,7 @@ const fetchEntries = async () => {
             throw new Error(`Error fetching entries: ${response.statusText}`);
         }
         const data = await response.json();
+        console.log(data);
         if (data.message !== 'Unauthorized: No token provided') {
             entries.value = data;
         }
@@ -70,8 +71,6 @@ const deleteEntry = async (id) => {
             credentials: 'include'
         });
         if (response.ok) {
-            const data = await response.json();
-            console.log(data);
             entries.value = entries.value.filter(entry => entry._id !== id);
         }
     } catch (error) {

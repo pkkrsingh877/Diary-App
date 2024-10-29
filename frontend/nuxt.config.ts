@@ -4,5 +4,13 @@ export default defineNuxtConfig({
     public: {
       apiURL: process.env.API_URL // Make it available on the client side
     }
-  }
+  },
+  nitro: {
+    devProxy: {
+      '/': {
+        target: 'https://api.diary.prabhatkumar.site/',
+        changeOrigin: true, // Important for cookies, etc.
+      },
+    },
+  },
 })

@@ -31,7 +31,7 @@ const entries = ref([]);
 
 const fetchEntries = async () => {
     try {
-        const response = await fetch(`${useRuntimeConfig().public.apiURL}entries/`, {
+        const response = await fetch(`/entries`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ onMounted(fetchEntries);
 
 const deleteEntry = async (id) => {
     try {
-        const response = await fetch(`${useRuntimeConfig().public.apiURL}entries/${id}`, {
+        const response = await fetch(`/entries/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

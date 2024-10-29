@@ -40,10 +40,10 @@ const fetchEntries = async () => {
             },
             credentials: 'include'
         });
+        const data = await response.json();
         if (!response.ok) {
             throw new Error(`Error fetching entries: ${response.statusText}`);
         }
-        const data = await response.json();
         console.log(data);
         if (data.message !== 'Unauthorized: No token provided') {
             entries.value = data;

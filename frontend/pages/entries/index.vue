@@ -50,7 +50,6 @@ const fetchEntries = async () => {
         }
     } catch (error) {
         console.error('Error fetching entries:', error);
-        alert('Failed to fetch entries. Please try again later.');
     } finally {
         isLoading.value = false;
     }

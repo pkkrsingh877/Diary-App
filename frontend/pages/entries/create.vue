@@ -34,7 +34,7 @@ const description = ref('');
 
 const handleCreateEntry = async (e) => {
     e.preventDefault();
-    const { data, error, pending } = await useFetch(`${useRuntimeConfig().public.apiURL}/entries/`, {
+    const { data, error, pending } = await useFetch(`${useRuntimeConfig().public.apiURL}entries/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -36,7 +36,7 @@ const description = ref('');
 const fetchEntry = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await fetch(`${useRuntimeConfig().public.apiURL}/entries/${id}`, {
+        const response = await fetch(`${useRuntimeConfig().public.apiURL}entries/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ onMounted(fetchEntry);
 const handleUpdateEntry = async (e) => {
     e.preventDefault();
     const { id } = useRoute().params;
-    const { message } = await useFetch(`http://localhost:8000/entries/${id}`, {
+    const { message } = await useFetch(`${useRuntimeConfig().public.apiURL}entries/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',

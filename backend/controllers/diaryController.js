@@ -3,7 +3,7 @@ const Diary = require("../models/diary");
 const getEntries = async (req, res) => {
     try {
         let entries = await Diary.find({ userId: req.user });
-        res.status(200).json(entries);
+        res.status(200).json({ entries });
     } catch (error) {
         console.log(error);
         res.status(400).json({ "error": "Couldn't Get The Data" });

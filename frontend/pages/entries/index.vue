@@ -1,12 +1,11 @@
 <template>
     <div class="container">
         <div class="section">
-            <div v-if="entries.length === 0">
-                No entries available.
-            </div>
+            <div v-if="isLoading">Loading entries...</div>
+            <div v-else-if="entries.length === 0">No entries available.</div>
             <div v-else>
                 <div v-for="entry in entries" :key="entry._id">
-                    <div class="card  mb-4">
+                    <div class="card mb-4">
                         <header class="card-header">
                             <p class="card-header-title">{{ entry.title }}</p>
                         </header>
@@ -28,8 +27,10 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 const entries = ref([]);
+const isLoading = ref(true);
 
 const fetchEntries = async () => {
+    isLoading.value = true;
     try {
         const response = await fetch(`/entries`, {
             method: 'GET',
@@ -39,18 +40,26 @@ const fetchEntries = async () => {
             },
             credentials: 'include'
         });
+        if (!response.ok) {
+            throw new Error(`Error fetching entries: ${response.statusText}`);
+        }
         const data = await response.json();
         if (data.message !== 'Unauthorized: No token provided') {
             entries.value = data;
         }
     } catch (error) {
         console.error('Error fetching entries:', error);
+        alert('Failed to fetch entries. Please try again later.');
+    } finally {
+        isLoading.value = false;
     }
 };
 
 onMounted(fetchEntries);
 
 const deleteEntry = async (id) => {
+    if (!confirm('Are you sure you want to delete this entry?')) return;
+
     try {
         const response = await fetch(`/entries/${id}`, {
             method: 'DELETE',
@@ -63,10 +72,12 @@ const deleteEntry = async (id) => {
         if (response.ok) {
             entries.value = entries.value.filter(entry => entry._id !== id);
         } else {
-            console.error('Failed to delete todo. Server response:', response);
+            console.error('Failed to delete entry. Server response:', response);
+            alert('Failed to delete entry. Please try again later.');
         }
     } catch (error) {
         console.error('Error deleting entries:', error);
+        alert('Failed to delete entry. Please try again later.');
     }
 };
 </script>

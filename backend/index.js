@@ -18,9 +18,9 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(cors({
     origin: ['https://diary.prabhatkumar.site', 'https://www.diary.prabhatkumar.site'], // Replace with your frontend URL
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true, // Allow credentials (cookies)
+    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    // allowedHeaders: ['Content-Type', 'Authorization'],
+    // credentials: true, // Allow credentials (cookies)
 }));
 
 // Middleware

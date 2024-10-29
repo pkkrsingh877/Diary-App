@@ -13,7 +13,8 @@
                 <div class="field">
                     <label class="label">Entry</label>
                     <div class="control">
-                        <textarea class="textarea" placeholder="entry" id="description" v-model="description"></textarea>
+                        <textarea class="textarea" placeholder="entry" id="description"
+                            v-model="description"></textarea>
                     </div>
                 </div>
 
@@ -35,7 +36,7 @@ const description = ref('');
 const fetchEntry = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await fetch(`http://localhost:8000/entries/${id}`, {
+        const response = await fetch(`${useRuntimeConfig().public.apiURL}/entries/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

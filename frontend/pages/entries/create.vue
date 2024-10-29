@@ -13,7 +13,8 @@
                 <div class="field">
                     <label class="label">Entry</label>
                     <div class="control">
-                        <textarea class="textarea" placeholder="Entry" id="description" v-model="description"></textarea>
+                        <textarea class="textarea" placeholder="Entry" id="description"
+                            v-model="description"></textarea>
                     </div>
                 </div>
 
@@ -33,7 +34,7 @@ const description = ref('');
 
 const handleCreateEntry = async (e) => {
     e.preventDefault();
-    const { data, error, pending } = await useFetch('http://localhost:8000/entries/', {
+    const { data, error, pending } = await useFetch(`${useRuntimeConfig().public.apiURL}/entries/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -46,7 +46,7 @@ const password = ref('');
 
 const handleLogin = async (e) => {
     e.preventDefault();
-    const { message } = await useFetch('http://localhost:8000/auth/login', {
+    const { message } = await useFetch(`${useRuntimeConfig().public.apiURL}/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

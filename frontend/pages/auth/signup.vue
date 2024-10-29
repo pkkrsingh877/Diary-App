@@ -68,7 +68,7 @@ const password = ref('');
 
 const handleSignup = async (e) => {
     e.preventDefault();
-    const { message } = await useFetch('http://localhost:8000/auth/signup', {
+    const { message } = await useFetch(`${useRuntimeConfig().public.apiURL}/auth/signup`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ const entries = ref([]);
 
 const fetchEntries = async () => {
     try {
-        const response = await fetch('http://localhost:8000/entries/', {
+        const response = await fetch(`${useRuntimeConfig().public.apiURL}/entries/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

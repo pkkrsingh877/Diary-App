@@ -33,7 +33,7 @@ const entry = ref('');
 const fetchEntry = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await fetch(`http://localhost:8000/entries/${id}`, {
+        const response = await fetch(`${useRuntimeConfig().public.apiURL}/entries/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

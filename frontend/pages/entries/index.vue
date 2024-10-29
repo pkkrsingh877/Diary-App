@@ -70,14 +70,12 @@ const deleteEntry = async (id) => {
             credentials: 'include'
         });
         if (response.ok) {
+            const data = await response.json();
+            console.log(data);
             entries.value = entries.value.filter(entry => entry._id !== id);
-        } else {
-            console.error('Failed to delete entry. Server response:', response);
-            alert('Failed to delete entry. Please try again later.');
         }
     } catch (error) {
         console.error('Error deleting entries:', error);
-        alert('Failed to delete entry. Please try again later.');
     }
 };
 </script>

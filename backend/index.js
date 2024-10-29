@@ -17,10 +17,10 @@ app.use(methodOverride('_method'));
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(cors({
-    origin: ['https://diary.prabhatkumar.site', 'https://www.diary.prabhatkumar.site'], // Replace with your frontend URL
-    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-    // allowedHeaders: ['Content-Type', 'Authorization'],
-    // credentials: true, // Allow credentials (cookies)
+    origin: ['https://diary.prabhatkumar.site', 'https://www.diary.prabhatkumar.site'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
 }));
 
 // Middleware

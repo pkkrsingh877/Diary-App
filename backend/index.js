@@ -12,6 +12,10 @@ const morgan = require('morgan');
 // Middlewares
 
 app.use(express.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+    res.setHeader('Content-Type', 'application/json'); // Set JSON as default content type
+    next();
+});
 app.use(express.json());
 app.use(methodOverride('_method'));
 app.use(morgan('dev'));

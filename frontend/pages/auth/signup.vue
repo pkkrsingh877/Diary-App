@@ -59,6 +59,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 import { ref } from 'vue';
 const router = useRouter();
 const name = ref('');
@@ -68,21 +69,23 @@ const password = ref('');
 
 const handleSignup = async (e) => {
     e.preventDefault();
-    const { message } = await useFetch(`/auth/signup`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
+    try {
+        await axios.post(`/auth/signup`, {
             name: name.value,
             username: username.value,
             email: email.value,
             password: password.value
-        }),
-        credentials: 'include'
-    });
-    router.push('/entries');
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            withCredentials: true
+        });
+        router.push('/entries');
+    } catch (error) {
+        console.error('Error signing up:', error);
+    }
 }
 </script>
 

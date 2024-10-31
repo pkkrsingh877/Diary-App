@@ -40,25 +40,28 @@
 
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
 const router = useRouter();
 const username = ref('');
 const password = ref('');
 
 const handleLogin = async (e) => {
     e.preventDefault();
-    const { message } = await useFetch(`/auth/login`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
+    try {
+        await axios.post(`/auth/login`, {
             username: username.value,
             password: password.value
-        }),
-        credentials: 'include'
-    });
-    router.push('/entries');
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            withCredentials: true
+        });
+        router.push('/entries');
+    } catch (error) {
+        console.error('Error logging in:', error);
+    }
 }
 </script>
 

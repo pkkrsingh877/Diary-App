@@ -28,25 +28,31 @@
 
 <script setup>
 import { ref } from 'vue';
+import axios from 'axios';
 const router = useRouter();
 const title = ref('');
 const description = ref('');
 
 const handleCreateEntry = async (e) => {
     e.preventDefault();
-    const { data, error, pending } = await useFetch(`/entries`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
+    try {
+        const response = await axios.post('https://api.diary.prabhatkumar.site/entries', {
             title: title.value,
             description: description.value
-        }),
-        credentials: 'include'
-    });
-    router.push('/entries');
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            withCredentials: true
+        });
+
+        if (response.status === 200 || response.status === 201) {
+            router.push('/entries');
+        }
+    } catch (error) {
+        console.error('Error creating entry:', error);
+    }
 }
 </script>
 

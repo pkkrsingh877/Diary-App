@@ -27,6 +27,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 import { ref } from 'vue';
 const router = useRouter();
 const title = ref('');
@@ -36,19 +37,17 @@ const description = ref('');
 const fetchEntry = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await fetch(`/entries/${id}`, {
-            method: 'GET',
+        const response = await axios.get(`/entries/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            credentials: 'include'
+            withCredentials: true
         });
-        const data = await response.json();
-        title.value = data.title;
-        description.value = data.description;
+        title.value = response.data.title;
+        description.value = response.data.description;
     } catch (error) {
-        console.error('Error fetching entries:', error);
+        console.error('Error fetching entry:', error);
     }
 };
 
@@ -58,19 +57,21 @@ onMounted(fetchEntry);
 const handleUpdateEntry = async (e) => {
     e.preventDefault();
     const { id } = useRoute().params;
-    const { message } = await useFetch(`/entries/${id}`, {
-        method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify({
+    try {
+        await axios.patch(`/entries/${id}`, {
             title: title.value,
             description: description.value
-        }),
-        credentials: 'include'
-    });
-    router.push('/entries');
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            withCredentials: true
+        });
+        router.push('/entries');
+    } catch (error) {
+        console.error('Error updating entry:', error);
+    }
 }
 </script>
 

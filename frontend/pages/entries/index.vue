@@ -26,25 +26,21 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
+import axios from 'axios';
 const entries = ref([]);
 const isLoading = ref(true);
 
 const fetchEntries = async () => {
     isLoading.value = true;
     try {
-        const response = await fetch(`/entries`, {
-            method: 'GET',
+        const response = await axios.get('https://api.diary.prabhatkumar.site/entries', {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            credentials: 'include'
+            withCredentials: true
         });
-        const data = await response.json();
-        if (!response.ok) {
-            throw new Error(`Error fetching entries: ${response.statusText}`);
-        }
-        console.log(data);
+        const data = response.data;
         if (data.message !== 'Unauthorized: No token provided') {
             entries.value = data;
         }
@@ -61,15 +57,14 @@ const deleteEntry = async (id) => {
     if (!confirm('Are you sure you want to delete this entry?')) return;
 
     try {
-        const response = await fetch(`/entries/${id}`, {
-            method: 'DELETE',
+        const response = await axios.delete(`https://api.diary.prabhatkumar.site/entries/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            credentials: 'include'
+            withCredentials: true
         });
-        if (response.ok) {
+        if (response.status === 200) {
             entries.value = entries.value.filter(entry => entry._id !== id);
         }
     } catch (error) {

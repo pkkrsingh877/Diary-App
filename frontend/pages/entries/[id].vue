@@ -26,6 +26,7 @@
 </template>
 
 <script setup>
+import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
 const entry = ref('');
@@ -33,18 +34,14 @@ const entry = ref('');
 const fetchEntry = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await fetch(`/entries/${id}`, {
-            method: 'GET',
+        const response = await axios.get(`/entries/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            credentials: 'include'
+            withCredentials: true
         });
-        const data = await response.json();
-        if (data.message !== 'Unauthorized: No token provided') {
-            entry.value = data;
-        }
+        entry.value = response.data;
     } catch (error) {
         console.error('Error fetching entry:', error);
     }
@@ -54,15 +51,13 @@ onMounted(fetchEntry);
 
 const deleteEntry = async (id) => {
     try {
-        const response = await fetch(`/entries/${id}`, {
-            method: 'DELETE',
+        await axios.delete(`/entries/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            credentials: 'include'
+            withCredentials: true
         });
-        const data = await response.json();
         router.push('/');
     } catch (error) {
         console.error('Error deleting entry:', error);

@@ -70,7 +70,7 @@ const password = ref('');
 const handleSignup = async (e) => {
     e.preventDefault();
     try {
-        await axios.post(`/auth/signup`, {
+        await axios.post(`https://api.diary.prabhatkumar.site/auth/signup`, {
             name: name.value,
             username: username.value,
             email: email.value,

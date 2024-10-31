@@ -34,7 +34,7 @@ const entry = ref('');
 const fetchEntry = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await axios.get(`/entries/${id}`, {
+        const response = await axios.get(`https://api.diary.prabhatkumar.site/entries/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -51,7 +51,7 @@ onMounted(fetchEntry);
 
 const deleteEntry = async (id) => {
     try {
-        await axios.delete(`/entries/${id}`, {
+        await axios.delete(`https://api.diary.prabhatkumar.site/entries/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'

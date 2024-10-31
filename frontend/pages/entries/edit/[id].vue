@@ -37,7 +37,7 @@ const description = ref('');
 const fetchEntry = async () => {
     try {
         const { id } = useRoute().params;
-        const response = await axios.get(`/entries/${id}`, {
+        const response = await axios.get(`https://api.diary.prabhatkumar.site/entries/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
@@ -58,7 +58,7 @@ const handleUpdateEntry = async (e) => {
     e.preventDefault();
     const { id } = useRoute().params;
     try {
-        await axios.patch(`/entries/${id}`, {
+        await axios.patch(`https://api.diary.prabhatkumar.site/entries/${id}`, {
             title: title.value,
             description: description.value
         }, {

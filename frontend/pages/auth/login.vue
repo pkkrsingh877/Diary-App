@@ -48,7 +48,7 @@ const password = ref('');
 const handleLogin = async (e) => {
     e.preventDefault();
     try {
-        await axios.post(`/auth/login`, {
+        await axios.post(`https://api.diary.prabhatkumar.site/auth/login`, {
             username: username.value,
             password: password.value
         }, {
